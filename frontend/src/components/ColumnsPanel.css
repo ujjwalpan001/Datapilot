@@ -1,0 +1,173 @@
+/* ═══════════════════════════════════════════════════════
+   COLUMNS PANEL — Data Schema Drawer
+═══════════════════════════════════════════════════════ */
+.columns-panel {
+  width: 220px;
+  min-width: 220px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-xl);
+  background: rgba(8, 8, 20, 0.8);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+  animation: fadeUp 0.5s var(--ease-smooth) 0.2s both;
+  position: relative;
+}
+
+.columns-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), transparent);
+}
+
+/* ── Panel Header ───────────────────────────────── */
+.columns-header {
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.columns-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.columns-header-title .ch-icon {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--cyan);
+}
+
+.columns-header-title span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.columns-header-hint {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  padding-left: 34px;
+  line-height: 1.4;
+}
+
+/* Count Badge */
+.columns-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-left: auto;
+}
+
+/* ── Column List ────────────────────────────────── */
+.columns-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.column-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+}
+
+.column-item:hover {
+  background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(124,58,237,0.05));
+  border-color: rgba(6,182,212,0.15);
+  transform: translateX(2px);
+}
+
+.column-item:hover .col-arrow { opacity: 1; transform: translateX(0); }
+
+/* Column type icon */
+.col-type-badge {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.column-item:hover .col-type-badge {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.3);
+  color: var(--cyan-light);
+}
+
+.col-name {
+  flex: 1;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.2s;
+  font-family: var(--font-mono);
+}
+
+.column-item:hover .col-name { color: var(--text-primary); }
+
+.col-arrow {
+  font-size: 0.65rem;
+  color: var(--cyan);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s var(--ease-smooth);
+  flex-shrink: 0;
+}
+
+/* ── Panel Footer ────────────────────────────── */
+.columns-footer {
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--glass-border);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: center;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}

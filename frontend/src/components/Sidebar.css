@@ -1,0 +1,285 @@
+/* ═══════════════════════════════════════════════════════
+   SIDEBAR — Nebula Command Rail
+═══════════════════════════════════════════════════════ */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px 12px;
+  background: rgba(8, 8, 20, 0.85);
+  backdrop-filter: var(--blur-xl);
+  -webkit-backdrop-filter: var(--blur-xl);
+  border-right: 1px solid var(--glass-border);
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s var(--ease-smooth) 0.1s both;
+  z-index: 20;
+}
+
+/* Vertical accent line */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(124,58,237,0.5) 30%,
+    rgba(6,182,212,0.3) 70%,
+    transparent 100%
+  );
+}
+
+/* Corner glow */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Sidebar Brand ────────────────────────────── */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px 20px;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 8px;
+}
+
+.sidebar-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--grad-violet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  box-shadow: 0 0 16px var(--violet-glow);
+  flex-shrink: 0;
+}
+
+.sidebar-brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── New Analysis Button ────────────────────────── */
+.new-chat-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(6,182,212,0.1));
+  border: 1px solid rgba(124,58,237,0.35);
+  color: var(--violet-light);
+  font-size: 0.83rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.25s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.new-chat-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.15));
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.new-chat-btn:hover::before { opacity: 1; }
+.new-chat-btn:hover {
+  border-color: rgba(124,58,237,0.6);
+  box-shadow: 0 0 20px rgba(124,58,237,0.2);
+  transform: translateY(-1px);
+}
+
+.new-chat-btn:active { transform: translateY(0); }
+
+.btn-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ── Section Label ────────────────────────────── */
+.sidebar-section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  margin-bottom: 6px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sidebar-section-label .label-icon {
+  font-size: 0.75rem;
+  color: var(--violet-light);
+  opacity: 0.7;
+}
+
+/* ── Session List ────────────────────────────── */
+.sessions-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-right: 2px;
+}
+
+.session-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+}
+
+.session-item:hover {
+  background: var(--glass-1);
+  border-color: var(--glass-border);
+}
+
+.session-item.active {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.06));
+  border-color: rgba(124,58,237,0.25);
+}
+
+.session-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--grad-accent);
+  box-shadow: 0 0 8px var(--violet-glow);
+}
+
+.session-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--glass-2);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 0.2s;
+}
+
+.session-item:hover .session-icon,
+.session-item.active .session-icon {
+  border-color: rgba(124,58,237,0.3);
+  color: var(--violet-light);
+  background: rgba(124,58,237,0.1);
+}
+
+.session-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.session-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.session-item.active .session-title { color: var(--violet-light); }
+
+.session-date {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Empty State */
+.sessions-empty {
+  padding: 24px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sessions-empty .empty-icon {
+  font-size: 1.5rem;
+  opacity: 0.3;
+}
+
+.sessions-empty p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Sidebar Footer ────────────────────────────── */
+.sidebar-footer {
+  padding: 16px 8px 4px;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 8px;
+}
+
+.sidebar-footer-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.sidebar-footer-info .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 6px var(--emerald-glow);
+  animation: pulse-glow 2s ease-in-out infinite;
+  flex-shrink: 0;
+}

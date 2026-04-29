@@ -1,0 +1,261 @@
+/* ═══════════════════════════════════════════════════════
+   CHAT AREA — Mission Control Console
+═══════════════════════════════════════════════════════ */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  gap: 10px;
+  animation: fadeUp 0.5s var(--ease-smooth) 0.15s both;
+}
+
+/* ── Messages Area ──────────────────────────────────── */
+.messages-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  background: rgba(8, 8, 20, 0.75);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* Scan-line effect on the messages area */
+.messages-area::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.5), rgba(6,182,212,0.4), transparent);
+}
+
+/* ── Empty Chat State ──────────────────────────────── */
+.empty-chat-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 40px 20px;
+}
+
+.empty-chat-icon {
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.08));
+  border: 1px solid rgba(124,58,237,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 0 30px rgba(124,58,237,0.1);
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-chat-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.empty-chat-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Suggestion Chips */
+.suggestions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.suggestion-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--glass-1);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.suggestion-chip:hover {
+  background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(6,182,212,0.06));
+  border-color: rgba(124,58,237,0.3);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.suggestion-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--violet-light);
+  opacity: 0.7;
+}
+
+/* ── Loading Bubble ──────────────────────────────── */
+.loading-bubble {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  background: rgba(124, 58, 237, 0.06);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  max-width: 200px;
+  animation: fadeUp 0.3s var(--ease-smooth) forwards;
+}
+
+.loading-bubble .loading-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.loading-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--violet-light);
+  animation: dot-bounce 1.2s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%            { transform: translateY(-6px); opacity: 1; }
+}
+
+.loading-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ── Input Area ──────────────────────────────────── */
+.input-area {
+  border-radius: var(--radius-xl);
+  padding: 6px 6px 6px 20px;
+  background: rgba(8, 8, 20, 0.85);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-panel);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.input-area::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.4), rgba(6,182,212,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.input-area:focus-within {
+  border-color: rgba(124,58,237,0.35);
+  box-shadow: var(--shadow-panel), 0 0 40px rgba(124,58,237,0.08);
+}
+
+.input-area:focus-within::before { opacity: 1; }
+
+.input-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  padding: 12px 0;
+  caret-color: var(--violet-light);
+}
+
+.chat-input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.chat-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Send Button */
+.send-btn {
+  width: 42px; height: 42px;
+  border-radius: var(--radius-md);
+  background: var(--grad-violet);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  transition: all 0.25s var(--ease-bounce);
+  box-shadow: 0 4px 16px rgba(124,58,237,0.4);
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(124,58,237,0.6);
+}
+
+.send-btn:active:not(:disabled) { transform: scale(0.95); }
+
+.send-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Input toolbar hint */
+.input-hint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 2px 2px;
+  margin-top: -2px;
+}
+
+.input-hint-text {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
